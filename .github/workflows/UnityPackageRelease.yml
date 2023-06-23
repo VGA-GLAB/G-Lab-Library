@@ -25,7 +25,7 @@ jobs:
       # キャッシュ設定
       - uses: actions/cache@v2
         with:
-          path: Library
+          path: Assets
           key: Library-UnityPackageTest-StandaloneLinux64
           restore-keys: |
             Library-UnityPackageTest-
@@ -52,7 +52,7 @@ jobs:
         with:
           tag_name: "${{ env.VERSION_NAME }}"
           release_name: "${{ env.VERSION_NAME }}"
-          body: "https://github.com/kameffee/UnityPackageTest.git#${{ env.VERSION_NAME }}"
+          body: "https://github.com/VGA-GLAB/G-Lab-Library.git#${{ env.VERSION_NAME }}"
           draft: true
           prerelease: false
 
