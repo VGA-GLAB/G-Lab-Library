@@ -1,4 +1,4 @@
-name: Release-test
+name: UnityPackageRelease
 
 on: 
   workflow_dispatch:
