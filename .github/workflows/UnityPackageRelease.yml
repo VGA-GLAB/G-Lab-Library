@@ -25,7 +25,7 @@ jobs:
       # キャッシュ設定
       - uses: actions/cache@v2
         with:
-          path: Assets
+          path: Library
           key: Library-UnityPackageTest-StandaloneLinux64
           restore-keys: |
             Library-UnityPackageTest-
