@@ -37,7 +37,6 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          projectPath: .
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: 2022.3.19f1
           targetPlatform: StandaloneLinux64
