@@ -72,5 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .vsconfig
 Assets/Private/
-Library/ShaderCache/
-Library/PackageCache/
+Library/
