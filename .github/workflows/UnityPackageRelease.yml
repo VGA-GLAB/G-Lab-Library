@@ -1,4 +1,4 @@
-name: UnityPackageRelease
+name: Release-test
 
 on: 
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
         required: true
 
 env:
-  FILE_NAME: "GlibUnityPackage_${{ github.event.inputs.version }}.unitypackage"
+  FILE_NAME: "UnityPackage_${{ github.event.inputs.version }}.unitypackage"
   VERSION_NAME: ${{ github.event.inputs.version }}
   # Expoterから出力されるファイルパス
   EXPORT_FILE: "./GlibUnityPackage.unitypackage"
@@ -39,7 +39,7 @@ jobs:
         with:
           projectPath: .
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2022.3.19f1
+          unityVersion: 2021.3.19f1
           targetPlatform: StandaloneLinux64
           buildMethod: PackageExporter.Export
 
@@ -52,7 +52,7 @@ jobs:
         with:
           tag_name: "${{ env.VERSION_NAME }}"
           release_name: "${{ env.VERSION_NAME }}"
-          body: "https://github.com/VGA-GLAB/G-Lab-Library.git#${{ env.VERSION_NAME }}"
+          body: "https://github.com/kameffee/UnityPackageTest.git#${{ env.VERSION_NAME }}"
           draft: true
           prerelease: false
 
