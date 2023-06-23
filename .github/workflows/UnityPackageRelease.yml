@@ -11,7 +11,7 @@ env:
   FILE_NAME: "UnityPackageTest_${{ github.event.inputs.version }}.unitypackage"
   VERSION_NAME: ${{ github.event.inputs.version }}
   # Expoterから出力されるファイルパス
-  EXPORT_FILE: "./UnityPackageTest.unitypackage"
+  EXPORT_FILE: "./GlibUnityPackage.unitypackage"
 
 jobs:
 
