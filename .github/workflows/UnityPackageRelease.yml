@@ -8,7 +8,7 @@ on:
         required: true
 
 env:
-  FILE_NAME: "UnityPackage_${{ github.event.inputs.version }}.unitypackage"
+  FILE_NAME: "GlibUnityPackage_${{ github.event.inputs.version }}.unitypackage"
   VERSION_NAME: ${{ github.event.inputs.version }}
   # Expoterから出力されるファイルパス
   EXPORT_FILE: "./GlibUnityPackage.unitypackage"
@@ -28,7 +28,7 @@ jobs:
           path: Library
           key: Library-UnityPackageTest-StandaloneLinux64
           restore-keys: |
-            Library-UnityPackageTest-
+            Library-GlibUnityPackage-StandaloneLinux64
             Library-
             
       # 関数を叩いてUnityPackage作成
