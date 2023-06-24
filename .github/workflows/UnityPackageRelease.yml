@@ -12,6 +12,7 @@ env:
   VERSION_NAME: ${{ github.event.inputs.version }}
   # Expoterから出力されるファイルパス
   EXPORT_FILE: "./GlibUnityPackage.unitypackage"
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
 
