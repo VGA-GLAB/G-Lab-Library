@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version: eg. v1.0.2"
+        description: "Version: eg. v1..2"
         required: true
 
 env:
