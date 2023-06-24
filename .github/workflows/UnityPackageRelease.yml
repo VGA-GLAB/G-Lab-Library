@@ -39,7 +39,7 @@ jobs:
         with:
           projectPath: ./
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: 2020.3.5f1
+          unityVersion: 202.3.5f1
           targetPlatform: StandaloneLinux64
           buildMethod: PackageExporter.Export
 
