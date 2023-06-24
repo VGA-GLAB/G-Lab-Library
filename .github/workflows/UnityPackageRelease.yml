@@ -37,7 +37,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          projectPath: ./
+          projectPath: ./Glib/
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           unityVersion: 2020.3.5f1
           targetPlatform: StandaloneLinux64
