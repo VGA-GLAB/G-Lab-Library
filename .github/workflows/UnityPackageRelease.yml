@@ -50,7 +50,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: "${{ env.VERSION_NAME }}"
+          tag_name: ${{ github.ref }}
           release_name: "${{ env.VERSION_NAME }}"
           body: "https://github.com/VGA-GLAB/G-Lab-Library.git#${{ env.VERSION_NAME }}"
           draft: true
