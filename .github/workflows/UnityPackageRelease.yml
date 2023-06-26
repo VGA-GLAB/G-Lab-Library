@@ -1,5 +1,6 @@
 name: Release
 
+# トリガー。releaseブランチにプッシュされたらワークフローを実行する。
 on:
   push:
     branches:
@@ -7,23 +8,29 @@ on:
     tags:
       - "1.0.0"
 
+# 環境変数の定義
+# 環境変数は 定義したaction内でしか利用できません。
 env:
+  # {{ github.event.inputs.version }}は 入力された値が入る。
   FILE_NAME: "GlibUnityPackage_${{ github.event.inputs.version }}.unitypackage"
   VERSION_NAME: ${{ github.event.inputs.version }}
   # Expoterから出力されるファイルパス
   EXPORT_FILE: "./GlibUnityPackage.unitypackage"
 
+# ワークフロー実行処理
 jobs:
-
   # パッケージ出力
   create-package:
+    # 実行環境の定義
     runs-on: ubuntu-latest
+    # チェックアウトする。チェックアウトとは リポジトリからソースコードやファイルを取得し展開することを指す。
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       # キャッシュ設定
       - uses: actions/cache@v2
+        # withとは アクションやステップに渡されるパラメータや引数のことを指す。
         with:
           path: Library
           key: Library-UnityPackageTest-StandaloneLinux64
@@ -46,6 +53,7 @@ jobs:
       # Releaseを切る
       - name: Create Release
         id: create_release
+        # actions/create-releaseアクションを使用してリリースを作成する。
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,8 +64,8 @@ jobs:
           draft: true
           prerelease: false
 
-      # アップロード
       - name: Upload UnityPackage
+        # actions/upload-release-assetアクションを利用して リリースにアップロードする。
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
