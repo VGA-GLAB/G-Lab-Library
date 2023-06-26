@@ -10,10 +10,12 @@ on:
 
 # 環境変数の定義
 # 環境変数は 定義したaction内でしか利用できません。
+
+  # {{ github.event.inputs.version }}で 入力された値を取得できる。
+  # 今回は使用しない。
+
 env:
-  # {{ github.event.inputs.version }}は 入力された値が入る。
-  FILE_NAME: "GlibUnityPackage_${{ github.event.inputs.version }}.unitypackage"
-  VERSION_NAME: ${{ github.event.inputs.version }}
+  FILE_NAME: "GlibUnityPackage_.unitypackage"
   # Expoterから出力されるファイルパス
   EXPORT_FILE: "./GlibUnityPackage.unitypackage"
 
