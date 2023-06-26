@@ -1,11 +1,9 @@
 name: Release
 
-on: 
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version: eg. v1.1.2"
-        required: true
+on:
+  push:
+    branches:
+      - release
 
 env:
   FILE_NAME: "GlibUnityPackage_${{ github.event.inputs.version }}.unitypackage"
