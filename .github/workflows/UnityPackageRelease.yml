@@ -5,7 +5,7 @@ on:
     branches:
       - release
     tags:
-      - "*"
+      - v1.0.0
   workflow_dispatch:
     inputs:
       version:
