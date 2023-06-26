@@ -5,13 +5,7 @@ on:
     branches:
       - release
     tags:
-      - v1.0.0
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version: eg. v1.1.2"
-        required: true
-        
+      - "1.0.0"
 
 env:
   FILE_NAME: "GlibUnityPackage_${{ github.event.inputs.version }}.unitypackage"
