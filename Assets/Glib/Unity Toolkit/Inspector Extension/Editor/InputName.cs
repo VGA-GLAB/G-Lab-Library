@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEditor;
-using System.Collections.Generic;
+using UnityEngine;
 
 [CustomPropertyDrawer(typeof(InputNameAttribute))]
 public class InputName : PropertyDrawer
@@ -55,7 +55,6 @@ public class InputName : PropertyDrawer
         {
             _inputNames[i] = new GUIContent($"{names[i]}"); // 中身を割り当てる
         }
-
 
         // 選択されていた値を検索し見つかった場合、インデックスを再指定する。
         // (この処理はエディター実行時に再コンパイルされ初期化されてしまうので必要な処理)
