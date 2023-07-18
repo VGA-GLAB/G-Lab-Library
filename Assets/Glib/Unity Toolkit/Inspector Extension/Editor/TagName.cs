@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 /// <summary>
@@ -14,3 +15,4 @@ public class TestTagDropBox : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
+#endif
