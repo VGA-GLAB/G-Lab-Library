@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -80,3 +81,4 @@ public class InputName : PropertyDrawer
         property.stringValue = _inputNames[_index].text;
     }
 }
+#endif

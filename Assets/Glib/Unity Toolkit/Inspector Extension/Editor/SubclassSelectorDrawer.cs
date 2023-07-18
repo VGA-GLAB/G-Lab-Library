@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.Reflection;
 using System.Linq;
@@ -130,3 +131,4 @@ public class SubclassSelectorDrawer : PropertyDrawer
         }
     }
 }
+#endif
