@@ -1,1 +1,1 @@
-今のところ特になし
+SubClassSelectorとEnumType属性のビルドしてちゃんと動くかテストする。

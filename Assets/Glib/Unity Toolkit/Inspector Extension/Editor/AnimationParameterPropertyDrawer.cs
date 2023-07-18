@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿#if UNITY_EDITOR
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -112,3 +113,4 @@ public class AnimationParameterPropertyDrawer : PropertyDrawer
         return animatorController.parameters.Select(p => p.name).ToArray();
     }
 }
+#endif
