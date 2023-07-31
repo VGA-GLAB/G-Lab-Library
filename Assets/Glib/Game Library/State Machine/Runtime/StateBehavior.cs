@@ -1,32 +1,35 @@
 // 日本語対応
 using UnityEngine;
 
-public abstract class StateBehavior : IState
+namespace StateMachine
 {
-    protected StateMachineSO _stateMachine;
-
-    public void Init(StateMachineSO stateMachine)
+    public abstract class StateBehavior : IState
     {
-        _stateMachine = stateMachine;
-        Start();
-    }
+        protected StateMachineSO _stateMachine;
 
-    public virtual void Start()
-    {
+        public void Init(StateMachineSO stateMachine)
+        {
+            _stateMachine = stateMachine;
+            Start();
+        }
 
-    }
-    public virtual void Enter()
-    {
+        public virtual void Start()
+        {
 
-    }
+        }
+        public virtual void Enter()
+        {
 
-    public virtual void Exit()
-    {
+        }
 
-    }
+        public virtual void Exit()
+        {
 
-    public virtual void Update()
-    {
+        }
 
+        public virtual void Update()
+        {
+
+        }
     }
 }

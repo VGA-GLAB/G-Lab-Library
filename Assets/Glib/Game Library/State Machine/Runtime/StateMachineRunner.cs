@@ -1,21 +1,24 @@
 // 日本語対応
 using UnityEngine;
 
-// ステートマシンを利用するためのコントローラーコンポーネント
-public class StateMachineRunner : MonoBehaviour
+namespace StateMachine
 {
-    [SerializeField]
-    private StateMachineSO _stateMachine;
-
-    public StateMachineSO StateMachine => _stateMachine;
-
-    private void Start()
+    // ステートマシンを利用するためのコントローラーコンポーネント
+    public class StateMachineRunner : MonoBehaviour
     {
-        _stateMachine = _stateMachine.Clone(this);
-        _stateMachine.Start();
-    }
-    private void Update()
-    {
-        _stateMachine.Update();
+        [SerializeField]
+        private StateMachineSO _stateMachine;
+
+        public StateMachineSO StateMachine => _stateMachine;
+
+        private void Start()
+        {
+            _stateMachine = _stateMachine.Clone(this);
+            _stateMachine.Start();
+        }
+        private void Update()
+        {
+            _stateMachine.Update();
+        }
     }
 }

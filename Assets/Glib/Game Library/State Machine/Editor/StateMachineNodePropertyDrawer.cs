@@ -3,15 +3,18 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(StateMachineNode))]
-public class StateMachineNodePropertyDrawer : Editor
+namespace StateMachine
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(StateMachineNode))]
+    public class StateMachineNodePropertyDrawer : Editor
     {
-        serializedObject.Update();
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("_name"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("_states"));
-        serializedObject.ApplyModifiedProperties();
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_name"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_states"));
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 }
 #endif

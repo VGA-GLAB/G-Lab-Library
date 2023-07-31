@@ -1,7 +1,10 @@
 // 日本語対応
 using UnityEngine;
 
-public class StateMachinePropetyAttribute : PropertyAttribute
+namespace StateMachine
 {
+    public class StateMachinePropetyAttribute : PropertyAttribute
+    {
 
+    }
 }

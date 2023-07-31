@@ -1,4 +1,7 @@
 // 日本語対応
 using UnityEngine;
 
-public class StateMachineConditionNameAttribute : PropertyAttribute { }
+namespace StateMachine
+{
+    public class StateMachineConditionNameAttribute : PropertyAttribute { }
+}
