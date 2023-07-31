@@ -120,6 +120,7 @@ public class StateMachineNodeView : UnityEditor.Experimental.GraphView.Node
     }
     public override void OnSelected()
     {
+        //Debug.Log(this.GetHashCode());
         base.OnSelected();
         OnNodeSelected?.Invoke(this);
     }

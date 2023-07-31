@@ -144,6 +144,7 @@ public class StateMachineEditor : EditorWindow
 
     bool isPreDrawCondition = false;
     Edge preEdge = null;
+
     private void OnInspectorUpdate()
     {
         _stateMachineView?.UpdateNodeState();

@@ -116,8 +116,7 @@ public class StateMachineNode : ScriptableObject
 
             for (int j = 0; j < conditions.Length; j++)
             {
-                conditions[j] = original._nextNodes[i]._conditions[j].Clone();
-                conditions[j].SetStateMachine(stateMachineClone);
+                conditions[j] = original._nextNodes[i]._conditions[j].Clone(stateMachineClone);
             }
 
             var t = new Transition(nodes[original._nextNodes[i]._nextState], conditions);

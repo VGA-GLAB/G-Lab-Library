@@ -76,23 +76,24 @@ public class StateMachineSO : ScriptableObject
 
         // オリジナルをキーに渡すことで、クローンを取得するディクショナリを作成する
         Dictionary<StateMachineNode, StateMachineNode> originalToClone = new Dictionary<StateMachineNode, StateMachineNode>();
-        List<StateMachineNode> nodes = new List<StateMachineNode>();
+        List<StateMachineNode> cloneNodes = new List<StateMachineNode>();
         // クローンを作成し、ディクショナリに登録する
-        foreach (var e in _nodes)
+        foreach (var e in this._nodes)
         {
-            originalToClone.Add(e, Instantiate(e));
-            nodes.Add(e);
+            var cloneNode = Instantiate(e);
+            originalToClone.Add(e, cloneNode);
+            cloneNodes.Add(cloneNode);
         }
+        // 開始ノードの割り当て
+        clone.EntryNode = originalToClone[this.EntryNode] as EntryNode;
+        clone._nodes = cloneNodes;
         // クローンのTransitionのセットアップを行う
         foreach (var e in originalToClone)
         {
             e.Value.CloneSetup(clone, e.Key, originalToClone);
         }
-        // 開始ノードの割り当て
-        clone.EntryNode = originalToClone[this.EntryNode] as EntryNode;
-        clone._nodes = nodes;
 #if UNITY_EDITOR
-        Traverse(clone.EntryNode, n => clone.Nodes.Add(n));
+        //Traverse(clone.EntryNode, n => clone.Nodes.Add(n));
 #endif
         return clone;
     }
