@@ -4,66 +4,52 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace StateMachine
+[CustomPropertyDrawer(typeof(StateMachineConditionNameAttribute))]
+public class StateMachineConditonNameDrawer : PropertyDrawer
 {
-    [CustomPropertyDrawer(typeof(StateMachineConditionNameAttribute))]
-    public class StateMachineConditonNameDrawer : PropertyDrawer
+    StateMachineNode currentTargetNode;
+    string currentKey;
+    GUIContent[] _contents;
+    Dictionary<string, int> _indexData = new Dictionary<string, int>();
+
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        int _index = -1;
-        GUIContent[] _contents;
+        currentTargetNode = property.serializedObject.targetObject as StateMachineNode;
+        currentKey = property.propertyPath;
 
-        Dictionary<string, int> _indexData = new Dictionary<string, int>();
-
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        if (_contents == null || _contents.Length != currentTargetNode.StateMachine.Values.Length)
         {
-            var stateNode = property.serializedObject.targetObject as StateMachineNode;
-            if (!_indexData.ContainsKey(property.propertyPath) || _index == -1 || _contents.Length != stateNode.StateMachine.Values.Length)
-            {
-                SetupArray(property);
-            }
-            // 配列でなければ通常処理
-            if (!property.isArray)
-            {
-                var oldIndex = _index;
-                _index = EditorGUI.Popup(position, label, _index, _contents);
-
-                if (_index != oldIndex)
-                {
-                    property.stringValue = _contents[_index].text;
-                }
-            }
-            else // 配列の処理
-            {
-                if (!_indexData.ContainsKey(property.propertyPath))
-                {
-                    _indexData.Add(property.propertyPath, 0);
-                    property.stringValue = _contents[_indexData[property.propertyPath]].text;
-                }
-
-                var oldIndex = _indexData[property.propertyPath];
-                _indexData[property.propertyPath] = EditorGUI.Popup(position, label, _indexData[property.propertyPath], _contents);
-
-                if (oldIndex != _indexData[property.propertyPath] || string.IsNullOrEmpty(property.stringValue))
-                {
-                    property.stringValue = _contents[_indexData[property.propertyPath]].text;
-                }
-            }
+            GUIContentsSetup();
         }
-        private void SetupArray(SerializedProperty property)
+
+        if (!_indexData.ContainsKey(currentKey))
         {
-            if (property.isArray)
-            {
-                _indexData = new Dictionary<string, int>();
-            }
+            IndexSetup(property);
+        }
 
-            var stateNode = property.serializedObject.targetObject as StateMachineNode;
-            _contents = new GUIContent[stateNode.StateMachine.Values.Length];
+        var oldIndex = _indexData[currentKey];
+        _indexData[currentKey] = EditorGUI.Popup(position, label, _indexData[currentKey], _contents);
 
-            for (int i = 0; i < _contents.Length; i++)
-            {
-                _contents[i] = new GUIContent(stateNode.StateMachine.Values[i].Name);
-            }
+        if (oldIndex != _indexData[currentKey] || string.IsNullOrEmpty(property.stringValue))
+        {
+            if (_indexData[currentKey] >= 0 && _indexData[currentKey] < _contents.Length)
+                property.stringValue = _contents[_indexData[currentKey]].text;
+        }
+    }
+    private void GUIContentsSetup()
+    {
+        _contents = new GUIContent[currentTargetNode.StateMachine.Values.Length];
 
+        for (int i = 0; i < _contents.Length; i++)
+        {
+            _contents[i] = new GUIContent(currentTargetNode.StateMachine.Values[i].Name);
+        }
+
+    }
+    private void IndexSetup(SerializedProperty property)
+    {
+        if (!_indexData.ContainsKey(currentKey)) // 既にエントリがあるか確認
+        {
             if (!string.IsNullOrEmpty(property.stringValue))
             {
                 bool inputNameFound = false;
@@ -71,41 +57,27 @@ namespace StateMachine
                 {
                     if (_contents[i].text == property.stringValue)
                     {
-                        _index = i;
                         inputNameFound = true;
-                        if (property.isArray)
-                        {
-                            _indexData.Add(property.propertyPath, i);
-                            property.stringValue = _contents[i].text;
-                        }
+                        _indexData[currentKey] = i; // 既存のエントリを更新
+
                         break;
                     }
-
                 }
                 if (!inputNameFound)
                 {
-                    _index = 0;
-                    if (property.isArray)
-                    {
-                        _indexData.Add(property.propertyPath, 0);
-                    }
+                    _indexData[currentKey] = 0; // 既存のエントリを更新
                 }
             }
             else
             {
-                _index = 0;
-                if (property.isArray)
-                {
-                    _indexData.Add(property.propertyPath, 0);
-                }
-            }
-
-            if (!property.isArray)
-            {
-                // プロパティに値を設定する。
-                property.stringValue = _contents[_index].text;
+                _indexData[currentKey] = 0; // 既存のエントリを更新
             }
         }
+
+        // property.stringValueの値を適切な値に設定
+        if (_indexData[currentKey] >= 0 && _indexData[currentKey] < _contents.Length)
+            property.stringValue = _contents[_indexData[currentKey]].text;
     }
+
 }
 #endif
