@@ -790,6 +790,7 @@ MonoBehaviour:
   value1: Value1
   value2: Value2
   value3: Value3
+  runner: {fileID: 0}
 --- !u!1 &1846044569
 GameObject:
   m_ObjectHideFlags: 0
