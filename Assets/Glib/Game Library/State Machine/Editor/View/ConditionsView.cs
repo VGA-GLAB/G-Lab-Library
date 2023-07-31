@@ -4,28 +4,31 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ConditionsView : VisualElement
+namespace StateMachine
 {
-    public new class UxmlFactory : UxmlFactory<ConditionsView, VisualElement.UxmlTraits> { }
-
-    Editor _editor;
-
-    internal void UpdateSelection(StateMachineSO stateMachine)
+    public class ConditionsView : VisualElement
     {
-        Clear();
+        public new class UxmlFactory : UxmlFactory<ConditionsView, VisualElement.UxmlTraits> { }
 
-        Object.DestroyImmediate(_editor);
-        _editor = Editor.CreateEditor(stateMachine);
+        Editor _editor;
 
-        IMGUIContainer container = new IMGUIContainer(() =>
+        internal void UpdateSelection(StateMachineSO stateMachine)
         {
-            if (_editor.target)
-            {
-                _editor.OnInspectorGUI();
-            }
-        });
+            Clear();
 
-        Add(container);
+            Object.DestroyImmediate(_editor);
+            _editor = Editor.CreateEditor(stateMachine);
+
+            IMGUIContainer container = new IMGUIContainer(() =>
+            {
+                if (_editor.target)
+                {
+                    _editor.OnInspectorGUI();
+                }
+            });
+
+            Add(container);
+        }
     }
 }
 #endif

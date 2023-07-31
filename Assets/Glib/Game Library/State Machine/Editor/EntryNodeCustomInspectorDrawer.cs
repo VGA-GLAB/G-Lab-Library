@@ -3,15 +3,18 @@
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>
-/// Entryノードのインスペクタを隠すクラス
-/// </summary>
-[CustomEditor(typeof(EntryNode))]
-public class EntryNodeCustomInspectorDrawer : Editor
+namespace StateMachine
 {
-    // Entryノードはインスペクタに何も表示しない。
-    public override void OnInspectorGUI()
+    /// <summary>
+    /// Entryノードのインスペクタを隠すクラス
+    /// </summary>
+    [CustomEditor(typeof(EntryNode))]
+    public class EntryNodeCustomInspectorDrawer : Editor
     {
+        // Entryノードはインスペクタに何も表示しない。
+        public override void OnInspectorGUI()
+        {
+        }
     }
 }
 #endif
