@@ -1,0 +1,95 @@
+#node-border {
+    background-color: rgb(78, 78, 78);
+    border-left-color: rgb(255, 0, 0);
+    border-right-color: rgb(255, 0, 0);
+    border-top-color: rgb(255, 0, 0);
+    border-bottom-color: rgb(255, 0, 0);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+
+#input {
+    align-items: flex-start;
+    width: auto;
+    max-width: 100px;
+    min-width: auto;
+}
+
+#output {
+    align-items: flex-end;
+}
+
+#selection-border {
+    border-left-color: rgb(66, 197, 255);
+    border-right-color: rgb(66, 197, 255);
+    border-top-color: rgb(66, 197, 255);
+    border-bottom-color: rgb(66, 197, 255);
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+:hover > #selection-border {
+    border-left-width: 1.6px;
+    border-right-width: 1.6px;
+    border-top-width: 1.6px;
+    border-bottom-width: 1.6px;
+}
+
+:selected > #selection-border {
+    border-left-width: 1.6px;
+    border-right-width: 1.6px;
+    border-top-width: 1.6px;
+    border-bottom-width: 1.6px;
+}
+
+:hover:selected > #selection-border {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+
+.NomalNode .node {
+    min-width: 200px;
+    width: 200px;
+    position: absolute;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    max-width: 200px;
+}
+
+#divider {
+    height: 1px;
+    background-color: rgb(137, 137, 137);
+    min-height: 1px;
+}
+
+#node-state {
+    height: 0;
+    min-height: 0;
+    max-height: 0;
+}
+
+.running #node-state {
+    height: 30px;
+    max-height: 30px;
+    min-height: 30px;
+}
+
+.node {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
