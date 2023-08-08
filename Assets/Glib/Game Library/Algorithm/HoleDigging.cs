@@ -14,8 +14,8 @@ namespace Glib
             /// <returns>指定された迷路(2次元配列)の要素</returns>
             public int this[int row, int column]
             {
-                get { return _maze[row, column]; }
-                set { _maze[row, column] = value; }
+                get => _maze[row, column];
+                set => _maze[row, column] = value;
             }
             private int[,] _maze = null;
             /// <summary>通路拡張開始地点候補</summary>
@@ -91,31 +91,24 @@ namespace Glib
                     SetPath(maze, x, y);
                     int dirsIndex = _random.Next(0, dirs.Count);
 
-                    try
+                    switch (dirs[dirsIndex])
                     {
-                        switch (dirs[dirsIndex])
-                        {
-                            case Direction.UP:
-                                SetPath(maze, x, --y);
-                                SetPath(maze, x, --y);
-                                break;
-                            case Direction.DOWN:
-                                SetPath(maze, x, ++y);
-                                SetPath(maze, x, ++y);
-                                break;
-                            case Direction.LEFT:
-                                SetPath(maze, --x, y);
-                                SetPath(maze, --x, y);
-                                break;
-                            case Direction.RIGHT:
-                                SetPath(maze, ++x, y);
-                                SetPath(maze, ++x, y);
-                                break;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        throw e;
+                        case Direction.UP:
+                            SetPath(maze, x, --y);
+                            SetPath(maze, x, --y);
+                            break;
+                        case Direction.DOWN:
+                            SetPath(maze, x, ++y);
+                            SetPath(maze, x, ++y);
+                            break;
+                        case Direction.LEFT:
+                            SetPath(maze, --x, y);
+                            SetPath(maze, --x, y);
+                            break;
+                        case Direction.RIGHT:
+                            SetPath(maze, ++x, y);
+                            SetPath(maze, ++x, y);
+                            break;
                     }
                 }
 
