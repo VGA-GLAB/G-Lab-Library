@@ -17,12 +17,13 @@ namespace Glib
                 get => _maze[row, column];
                 set => _maze[row, column] = value;
             }
+
             private int[,] _maze = null;
             /// <summary>通路拡張開始地点候補</summary>
             private List<(int, int)> _startList = new List<(int, int)>();
             private Random _random = new();
 
-            /// <summary>穴掘り法を用いて迷路を作成する<para>壁 -> 0 | 床 -> 1</para></summary>
+            /// <summary>穴掘り法を用いて迷路の2次元配列を作成する<para>壁 -> 0 | 床 -> 1</para></summary>
             /// <param name="width">迷路の横幅</param>
             /// <param name="height">迷路の縦幅</param>
             /// <exception cref="ArgumentOutOfRangeException">横幅か縦幅の大きさが５未満</exception>
@@ -130,6 +131,7 @@ namespace Glib
             }
 
             public int GetWidth() => _maze.GetLength(0);
+
             public int GetHeight() => _maze.GetLength(1);
 
             private const int _WALL = 0;
