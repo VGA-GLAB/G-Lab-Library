@@ -14,15 +14,16 @@ namespace Glib
             /// <returns>指定された迷路(2次元配列)の要素</returns>
             public int this[int row, int column]
             {
-                get { return _maze[row, column]; }
-                set { _maze[row, column] = value; }
+                get => _maze[row, column];
+                set => _maze[row, column] = value;
             }
+
             private int[,] _maze = null;
             /// <summary>通路拡張開始地点候補</summary>
             private List<(int, int)> _startList = new List<(int, int)>();
             private Random _random = new();
 
-            /// <summary>穴掘り法を用いて迷路を作成する<para>壁 -> 0 | 床 -> 1</para></summary>
+            /// <summary>穴掘り法を用いて迷路の2次元配列を作成する<para>壁 -> 0 | 床 -> 1</para></summary>
             /// <param name="width">迷路の横幅</param>
             /// <param name="height">迷路の縦幅</param>
             /// <exception cref="ArgumentOutOfRangeException">横幅か縦幅の大きさが５未満</exception>
@@ -91,31 +92,24 @@ namespace Glib
                     SetPath(maze, x, y);
                     int dirsIndex = _random.Next(0, dirs.Count);
 
-                    try
+                    switch (dirs[dirsIndex])
                     {
-                        switch (dirs[dirsIndex])
-                        {
-                            case Direction.UP:
-                                SetPath(maze, x, --y);
-                                SetPath(maze, x, --y);
-                                break;
-                            case Direction.DOWN:
-                                SetPath(maze, x, ++y);
-                                SetPath(maze, x, ++y);
-                                break;
-                            case Direction.LEFT:
-                                SetPath(maze, --x, y);
-                                SetPath(maze, --x, y);
-                                break;
-                            case Direction.RIGHT:
-                                SetPath(maze, ++x, y);
-                                SetPath(maze, ++x, y);
-                                break;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        throw e;
+                        case Direction.UP:
+                            SetPath(maze, x, --y);
+                            SetPath(maze, x, --y);
+                            break;
+                        case Direction.DOWN:
+                            SetPath(maze, x, ++y);
+                            SetPath(maze, x, ++y);
+                            break;
+                        case Direction.LEFT:
+                            SetPath(maze, --x, y);
+                            SetPath(maze, --x, y);
+                            break;
+                        case Direction.RIGHT:
+                            SetPath(maze, ++x, y);
+                            SetPath(maze, ++x, y);
+                            break;
                     }
                 }
 
@@ -137,6 +131,7 @@ namespace Glib
             }
 
             public int GetWidth() => _maze.GetLength(0);
+
             public int GetHeight() => _maze.GetLength(1);
 
             private const int _WALL = 0;
