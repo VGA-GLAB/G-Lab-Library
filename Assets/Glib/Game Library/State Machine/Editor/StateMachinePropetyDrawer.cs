@@ -3,6 +3,8 @@
 using UnityEditor;
 using UnityEngine;
 
+// StateMachineのValueからキーとなる文字列を引っ張ってきて
+// ドロップダウンリストで選択できるようにするための属性。
 [CustomPropertyDrawer(typeof(StateMachinePropetyAttribute))]
 public class StateMachinePropetyDrawer : PropertyDrawer
 {

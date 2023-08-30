@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4434593391231558089
+--- !u!114 &-166576101493195976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,64 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b88ddc74cd98464ea3b8e0345c79de8, type: 3}
-  m_Name: A
+  m_Name: StateMachineNode
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 11400000}
-  _name: A
-  guid: 639094579366c6b45aad23418505c6cd
-  _position: {x: 206.66669, y: -0.000015258789}
-  _nextNodes:
-  - _nextState: {fileID: -2742263031551096698}
-    _conditions:
-    - targetName: Value1
-  _states: []
-  references:
-    version: 2
-    RefIds: []
---- !u!114 &-2742263031551096698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b88ddc74cd98464ea3b8e0345c79de8, type: 3}
-  m_Name: B
-  m_EditorClassIdentifier: 
-  _stateMachine: {fileID: 11400000}
-  _name: B
-  guid: 93182c9be2bcbdd419e03fbae131ae4f
-  _position: {x: 208, y: 82}
-  _nextNodes:
-  - _nextState: {fileID: -2532957319690573308}
-    _conditions:
-    - targetName: Value2
-  _states: []
-  references:
-    version: 2
-    RefIds: []
---- !u!114 &-2532957319690573308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b88ddc74cd98464ea3b8e0345c79de8, type: 3}
-  m_Name: C
-  m_EditorClassIdentifier: 
-  _stateMachine: {fileID: 11400000}
-  _name: C
-  guid: 698a35292916f724a819cce5acb197f6
-  _position: {x: 208, y: 160.66669}
-  _nextNodes:
-  - _nextState: {fileID: -4434593391231558089}
-    _conditions:
-    - targetName: Value3
+  _name: State Machine Node
+  guid: 538fe026e44ad9d44abc8a68ee174437
+  _position: {x: 450, y: 173.6}
+  _nextNodes: []
   _states: []
   references:
     version: 2
@@ -82,22 +31,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f47ae440d7766242b106006d1993f36, type: 3}
-  m_Name: StateMachineData
+  m_Name: StateMachineData 1
   m_EditorClassIdentifier: 
-  _entryNode: {fileID: 8371960630561566783}
+  _entryNode: {fileID: 4518952998852402762}
   _nodes:
-  - {fileID: 8371960630561566783}
-  - {fileID: -4434593391231558089}
-  - {fileID: -2742263031551096698}
-  - {fileID: -2532957319690573308}
+  - {fileID: 4518952998852402762}
+  - {fileID: 2130829608131126414}
+  - {fileID: 7641167491874072236}
+  - {fileID: -166576101493195976}
   _values:
-  - _name: Value1
+  - _name: AAA
     _currentValue: 0
-  - _name: Value2
+  - _name: BBB
     _currentValue: 0
-  - _name: Value3
+  - _name: CCC
     _currentValue: 0
---- !u!114 &8371960630561566783
+--- !u!114 &2130829608131126414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b88ddc74cd98464ea3b8e0345c79de8, type: 3}
+  m_Name: BBB
+  m_EditorClassIdentifier: 
+  _stateMachine: {fileID: 11400000}
+  _name: BBB
+  guid: d246d32085aa9c743b37a7586a6eef75
+  _position: {x: 191, y: 82.36}
+  _nextNodes:
+  - _nextState: {fileID: 7641167491874072236}
+    _conditions:
+    - targetName: CCC
+    - targetName: AAA
+  - _nextState: {fileID: -166576101493195976}
+    _conditions: []
+  _states: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &4518952998852402762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,10 +87,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 11400000}
   _name: State Machine Node
-  guid: 978f404c283de4248b8c9e79c45ff60c
-  _position: {x: -37.333313, y: -18.666656}
+  guid: 5e9c2128441e9bc4994e02eec3b68776
+  _position: {x: 0, y: 0}
   _nextNodes:
-  - _nextState: {fileID: -4434593391231558089}
+  - _nextState: {fileID: 2130829608131126414}
+    _conditions: []
+  _states: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &7641167491874072236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b88ddc74cd98464ea3b8e0345c79de8, type: 3}
+  m_Name: GGG
+  m_EditorClassIdentifier: 
+  _stateMachine: {fileID: 11400000}
+  _name: GGG
+  guid: 7f38b54cf602d054bae49db18a4f4e27
+  _position: {x: 191.20001, y: 201}
+  _nextNodes:
+  - _nextState: {fileID: 2130829608131126414}
+    _conditions:
+    - targetName: AAA
+    - targetName: BBB
+  - _nextState: {fileID: -166576101493195976}
     _conditions: []
   _states: []
   references:
