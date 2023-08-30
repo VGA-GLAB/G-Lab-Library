@@ -5,25 +5,26 @@ using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "StateMachineData", menuName = "ScriptableObjects/StateMachine", order = 1)]
 public class StateMachineSO : ScriptableObject
 {
     [HideInInspector]
     [SerializeField]
-    private EntryNode _entryNode;
+    private EntryNode _entryNode; // 開始ノード
     public EntryNode EntryNode { get => _entryNode; set => _entryNode = value; }
 
-    private StateMachineNode _currentState = null;
+    private StateMachineNode _currentState = null; // 現在実行中のノード
     public StateMachineNode CurrentState => _currentState;
 
     [HideInInspector]
     [SerializeField]
-    private List<StateMachineNode> _nodes = new List<StateMachineNode>();
+    private List<StateMachineNode> _nodes = new List<StateMachineNode>(); // このステートマシンが所有する全てのノードリスト。
     public List<StateMachineNode> Nodes => _nodes;
 
     [SerializeField]
-    private BoolStateValue[] _values;
+    private BoolStateValue[] _values; // このステートマシンが持つ条件用の値。
     public BoolStateValue[] Values => _values;
 
     private StateMachineRunner _runner = null;
@@ -92,9 +93,7 @@ public class StateMachineSO : ScriptableObject
         {
             e.Value.CloneSetup(clone, e.Key, originalToClone);
         }
-#if UNITY_EDITOR
-        //Traverse(clone.EntryNode, n => clone.Nodes.Add(n));
-#endif
+
         return clone;
     }
 #if UNITY_EDITOR
@@ -103,7 +102,7 @@ public class StateMachineSO : ScriptableObject
         StateMachineNode node = ScriptableObject.CreateInstance(type) as StateMachineNode;
         node.name = type.Name;
         node.GUID = GUID.Generate().ToString();
-        node.SetStateMachine(this);
+        node.SetStateMachine(this); // StateMachineを渡しておく。
 
         Undo.RecordObject(this, "State Machine (Create Node)");
         _nodes.Add(node);
@@ -119,50 +118,39 @@ public class StateMachineSO : ScriptableObject
         Undo.RecordObject(this, "State Machine (Delete Node)");
         _nodes.Remove(node);
 
-        //AssetDatabase.RemoveObjectFromAsset(node);
         Undo.DestroyObjectImmediate(node);
 
         AssetDatabase.SaveAssets();
     }
-
-    public bool AddTo(StateMachineNode from, StateMachineNode to)
+    public bool TryConnect(StateMachineNode from, StateMachineNode to) // ノードの接続を試みる。
     {
-        for (int i = 0; i < from.NextNodes.Count; i++)
-        {
-            if (from.NextNodes[i]._nextState == to)
-            {
-                return false;
-            }
-        }
+        // 既に遷移先に含まれている場合は接続せず、falseを返す。
+        bool containsToState = from.NextNodes.Any(node => node._nextState == to);
+        if (containsToState) { return false; }
 
         Undo.RecordObject(from, "State Machine (Add Next State)");
 
+        // fromがEntryノードの場合、遷移リストをクリアする。（Entryノードの遷移先は一つだけ。）
         if (from is EntryNode && from.NextNodes.Count == 1)
         {
             from.NextNodes.Clear();
         }
 
-        var transition = new Transition(to, default);
+        // 遷移先を設定する。
+        var transition = new Transition(to, null);
         from.NextNodes.Add(transition);
         EditorUtility.SetDirty(from);
 
         return true;
     }
-    public void RemoveTo(StateMachineNode from, StateMachineNode to)
+    public void Disconnect(StateMachineNode from, StateMachineNode to) // エッジを切断する。
     {
         Undo.RecordObject(from, "State Machine (Remove Next State)");
 
-        Transition t = null;
-        for (int i = 0; i < from.NextNodes.Count; i++)
-        {
-            if (from.NextNodes[i]._nextState == to)
-            {
-                t = from.NextNodes[i];
-                break;
-            }
-        }
+        // 
+        Transition transition = from.NextNodes.Find(t => t._nextState == to);
 
-        if (t != null) from.NextNodes.Remove(t);
+        if (transition != null) from.NextNodes.Remove(transition);
         EditorUtility.SetDirty(from);
     }
     public List<StateMachineNode> GetNextStates(StateMachineNode from)
@@ -178,21 +166,6 @@ public class StateMachineSO : ScriptableObject
         }
 
         return nexts;
-    }
-
-    public void Traverse(StateMachineNode node, Action<StateMachineNode> visiter)
-    {
-        if (node)
-        {
-            if (!node.IsInspected)
-            {
-                node.IsInspected = true;
-                visiter.Invoke(node);
-                var children = GetNextStates(node);
-                children.ForEach(n => Traverse(n, visiter));
-            }
-            node.IsInspected = false;
-        }
     }
 #endif
 }
