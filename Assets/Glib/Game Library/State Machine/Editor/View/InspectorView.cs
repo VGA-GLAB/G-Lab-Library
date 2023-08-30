@@ -13,7 +13,7 @@ public class InspectorView : VisualElement
     public InspectorView()
     { }
 
-    internal void UpdateSelection(StateMachineNodeView nodeView)
+    internal void OnChangedSelection(StateMachineNodeView nodeView)
     {
         Clear();
 
@@ -30,6 +30,9 @@ public class InspectorView : VisualElement
     }
     internal void UpdateSelection(Edge edge)
     {
+        // エッジが選択された時にインスペクタに遷移条件を描画する処理を実行する。
+        // ちょっと強引なので時間を捻出して修正する。
+
         // EdgeからNodeViewを取得する
         var inputNodeView = edge.input.node as StateMachineNodeView;
         if (inputNodeView == null) return;

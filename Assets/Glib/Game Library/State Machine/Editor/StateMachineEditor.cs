@@ -7,11 +7,12 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+// StateMachineのエディタ画面を管理するクラス。
 public class StateMachineEditor : EditorWindow
 {
-    private StateMachineView _stateMachineView;
-    private InspectorView _inspectorView;
-    private ConditionsView _conditionsView;
+    private StateMachineView _stateMachineView; // 背景がグリッド状のビュー
+    private InspectorView _inspectorView;       // 左上のビュー。StateMachieneの状態を描画する。
+    private ConditionsView _conditionsView;     // 左下のビュー。遷移条件を描画する。
 
     [MenuItem("Window/StateMachineEditor")]
     public static void OpenWindow()
@@ -22,33 +23,34 @@ public class StateMachineEditor : EditorWindow
 
     public void CreateGUI()
     {
-        // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
 
-        // Import UXML
-        //var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/StateMachineEditor/Editor/StateMachineEditor.uxml");
+        // Uxmlファイルの読み込み
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(FindUxml("StateMachineEditor"));
         visualTree.CloneTree(root);
 
-        // A stylesheet can be added to a VisualElement.
-        // The style will be applied to the VisualElement and all of its children.
-        //var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/StateMachineEditor/Editor/StateMachineEditor.uss");
+        // Ussファイルの読み込み
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(FindUss("StateMachineEditor"));
         root.styleSheets.Add(styleSheet);
 
+        // 各要素の取得。obj.Q<T>()は、objの子要素のT型のオブジェクトを取得する関数。
         _stateMachineView = root.Q<StateMachineView>();
         _inspectorView = root.Q<InspectorView>();
         _conditionsView = root.Q<ConditionsView>();
 
-        _stateMachineView.OnNodeSelected = OnNodeSelectionChanged;
+        _stateMachineView.OnNodeSelected = OnSelectionChanged;
 
         OnSelectionChange();
     }
     StateMachineSO stateMachine;
     private void OnSelectionChange()
     {
+        // プロジェクトビューから選択されたオブジェクトを取得する。（StateMachineの取得に失敗した場合nullが帰ってくる。）
         stateMachine = Selection.activeObject as StateMachineSO;
 
+        // ヒエラルキーウィンドウから選択されたオブジェクトが
+        // StateMachineRunnerを持っており、RunnerにStateMachineが割り当てられていた場合に、
+        // StateMachineを取得する。
         if (stateMachine == null)
         {
             if (Selection.activeGameObject != null)
@@ -61,47 +63,16 @@ public class StateMachineEditor : EditorWindow
             }
         }
 
-        if (Application.isPlaying)
-        {
-            if (stateMachine != null)
-            {
-                _stateMachineView?.PopulateView(stateMachine);
-                _conditionsView?.UpdateSelection(stateMachine);
-            }
-        }
-
-        if (stateMachine != null && AssetDatabase.CanOpenAssetInEditor(stateMachine.GetInstanceID()))
+        if (stateMachine != null &&
+            (AssetDatabase.CanOpenAssetInEditor(stateMachine.GetInstanceID()) || Application.isPlaying))
         {
             _stateMachineView?.PopulateView(stateMachine);
             _conditionsView?.UpdateSelection(stateMachine);
         }
     }
-    void OnNodeSelectionChanged(StateMachineNodeView node)
+    void OnSelectionChanged(StateMachineNodeView node)
     {
-        _inspectorView.UpdateSelection(node);
-    }
-    private void OnGUI()
-    {
-        var e = Event.current;
-        if (GetEventAction(e) && e.type == EventType.KeyDown && e.keyCode == KeyCode.S)
-        {
-            Debug.Log("Saved StateMachineEditor");
-            if (stateMachine != null)
-            {
-                EditorUtility.SetDirty(stateMachine);
-                AssetDatabase.SaveAssets();
-            }
-            e.Use();
-        }
-    }
-
-    private bool GetEventAction(Event e)
-    {
-#if UNITY_EDITOR_WIN
-        return e.control;
-#else
-    return e.command;
-#endif
+        _inspectorView.OnChangedSelection(node);
     }
 
     // OnOpenAssetAttributeはアセットが開かれた際に呼び出されるコールバック関数。

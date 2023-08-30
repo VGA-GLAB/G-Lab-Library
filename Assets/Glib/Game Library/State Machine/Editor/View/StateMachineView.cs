@@ -48,7 +48,7 @@ public class StateMachineView : GraphView
     {
         _stateMachine = stateMachine;
         graphViewChanged -= OnGraphViewChanged;
-        DeleteElements(graphElements);
+        DeleteElements(graphElements); // 要素の削除を行う。
         graphViewChanged += OnGraphViewChanged;
 
         if (_stateMachine.EntryNode == null)
@@ -58,15 +58,15 @@ public class StateMachineView : GraphView
             AssetDatabase.SaveAssets();
         }
 
-        _stateMachine.Nodes.ForEach(n => CreateNodeView(n));
+        _stateMachine.Nodes.ForEach(node => CreateNodeView(node));
 
-        _stateMachine.Nodes.ForEach(n =>
+        _stateMachine.Nodes.ForEach(node =>
         {
-            var children = _stateMachine.GetNextStates(n);
-            foreach (var c in children)
+            var children = _stateMachine.GetNextStates(node);
+            foreach (var child in children)
             {
-                StateMachineNodeView parentView = FindNodeView(n);
-                StateMachineNodeView childView = FindNodeView(c);
+                StateMachineNodeView parentView = FindNodeView(node);
+                StateMachineNodeView childView = FindNodeView(child);
 
                 Edge edge = parentView.Output.ConnectTo(childView.Input);
                 AddElement(edge);
@@ -74,58 +74,53 @@ public class StateMachineView : GraphView
         });
     }
 
+    // グラフに対して何らかの変更が行われた時に実行される。
+    // https://docs.unity3d.com/ja/2019.4/ScriptReference/Experimental.GraphView.GraphView-graphViewChanged.html
+    // https://docs.unity3d.com/ja/2019.4/ScriptReference/Experimental.GraphView.GraphViewChange.html
     private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
     {
-        if (graphViewChange.elementsToRemove != null)
+        if (graphViewChange.elementsToRemove != null) // 要素が削除される時に実行される。
         {
-            graphViewChange.elementsToRemove.ForEach(elem =>
+            graphViewChange.elementsToRemove.ForEach(removeElem => // 全ての削除される要素を走査する。
             {
-                StateMachineNodeView nodeView = elem as StateMachineNodeView;
+                // ノードが削除される場合。
+                StateMachineNodeView nodeView = removeElem as StateMachineNodeView;
                 if (nodeView != null)
                 {
                     _stateMachine.DeleteNode(nodeView.Node);
                 }
 
-                Edge edge = elem as Edge;
+                // エッジが削除される場合。
+                Edge edge = removeElem as Edge;
                 if (edge != null)
                 {
                     StateMachineNodeView outNode = edge.output.node as StateMachineNodeView;
                     StateMachineNodeView inNode = edge.input.node as StateMachineNodeView;
-                    _stateMachine.RemoveTo(outNode.Node, inNode.Node);
+                    _stateMachine.Disconnect(outNode.Node, inNode.Node); // 接続状態を解除する。（切断する。）
                 }
             });
         }
 
-        if (graphViewChange.edgesToCreate != null)
+        if (graphViewChange.edgesToCreate != null) // エッジが作成されようとしている時に実行される。
         {
             graphViewChange.edgesToCreate.ForEach(edge =>
             {
                 StateMachineNodeView outNode = edge.output.node as StateMachineNodeView;
                 StateMachineNodeView inNode = edge.input.node as StateMachineNodeView;
 
-                if (!_stateMachine.AddTo(outNode.Node, inNode.Node))
-                {
-                    deleteEdges.Add(edge);
-                } // ノードの割り当てに失敗したらEdgeを破棄する。
+                _stateMachine.TryConnect(outNode.Node, inNode.Node); // 接続を試みる。（接続に失敗した場合falseを返す。）
             });
         }
-        // エッジの削除を遅延させる
-        EditorApplication.delayCall += () =>
-        {
-            deleteEdges.ForEach(edge => RemoveElement(edge));
-            deleteEdges.Clear();
-        };
 
         return graphViewChange;
     }
 
-    List<Edge> deleteEdges = new List<Edge>();
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
     {
         return ports.ToList().Where(endPort =>
-        endPort.direction != startPort.direction &&
-        endPort.node != startPort.node).ToList();
+            endPort.direction != startPort.direction &&
+            endPort.node != startPort.node).ToList();
     }
 
     public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
@@ -149,9 +144,9 @@ public class StateMachineView : GraphView
 
     public void UpdateNodeState()
     {
-        foreach (var n in nodes)
+        foreach (var node in nodes)
         {
-            StateMachineNodeView view = n as StateMachineNodeView;
+            StateMachineNodeView view = node as StateMachineNodeView;
             view?.UpdateState();
         }
     }

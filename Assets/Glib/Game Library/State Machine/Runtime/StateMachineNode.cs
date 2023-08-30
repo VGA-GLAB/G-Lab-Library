@@ -9,37 +9,42 @@ using UnityEngine;
 /// </summary>
 public class StateMachineNode : ScriptableObject
 {
-    [SerializeField]
-    private string _name = "State Machine Node";
-    public string Name { get => _name; set => _name = value; }
-
-    [SerializeField]
-    [HideInInspector]
-    private string guid;
-    public string GUID { get => guid; set => guid = value; }
-
-    [SerializeField]
-    private List<Transition> _nextNodes = new List<Transition>();
-    public List<Transition> NextNodes => _nextNodes;
-
-    [SerializeField]
-    [HideInInspector]
-    private Vector2 _position;
-    public Vector2 Position { get => _position; set => _position = value; }
-
-    [Header("実行するクラス")]
-    [SerializeField, SerializeReference, SubclassSelector]
-    private IState[] _states;
-
-    public bool IsRunning { get; private set; }
-    public bool IsInspected { get; set; } = false;
-
+    // 自分のオーナーとなるステートマシン。
     [SerializeField]
     [HideInInspector]
     private StateMachineSO _stateMachine;
     public StateMachineSO StateMachine => _stateMachine;
 
-    public System.Action OnValueChanged;
+    // このステートの名前。
+    [SerializeField]
+    private string _name = "State Machine Node";
+    public string Name { get => _name; set => _name = value; }
+
+    // Viewの復元のための値。
+    [SerializeField]
+    [HideInInspector]
+    private string guid;
+    public string GUID { get => guid; set => guid = value; }
+
+    // Viewの座標を表現する。
+    [SerializeField]
+    [HideInInspector]
+    private Vector2 _position;
+    public Vector2 Position { get => _position; set => _position = value; }
+
+    // 遷移データのリスト。（遷移データには、遷移条件と遷移先の情報が含まれる。）
+    [SerializeField]
+    private List<Transition> _nextNodes = new List<Transition>();
+    public List<Transition> NextNodes => _nextNodes;
+
+    [Header("実行するクラス")]
+    [SerializeField, SerializeReference, SubclassSelector]
+    private IState[] _states;
+
+    // 現在このステートが実行中かどうか表現する値。
+    public bool IsRunning { get; private set; }
+
+    public Action OnValueChanged; // Inspectorから値が変更された時に発火するイベント。
 
     private void OnValidate()
     {
@@ -48,15 +53,17 @@ public class StateMachineNode : ScriptableObject
     }
     public void Initialize(StateMachineSO stateMachineSO)
     {
+        // 実行されるオブジェクトの初期化。（StateMachineを渡す。）
         foreach (var e in _states)
         {
             e.Init(stateMachineSO);
         }
-        foreach (var e in _nextNodes)
+        // 遷移条件オブジェクトの初期化。（条件オブジェクトにStateMachineを渡す。）
+        foreach (var transition in _nextNodes)
         {
-            foreach (var i in e._conditions)
+            foreach (var condition in transition._conditions)
             {
-                i.SetStateMachine(stateMachineSO);
+                condition.SetStateMachine(stateMachineSO);
             }
         }
     }
@@ -66,7 +73,7 @@ public class StateMachineNode : ScriptableObject
     }
     public virtual void Enter()
     {
-        IsRunning = true;
+        IsRunning = true; // 現在実行中である事を表現する。
         foreach (var e in _states) e?.Enter();
     }
     public virtual void Update()
@@ -74,7 +81,7 @@ public class StateMachineNode : ScriptableObject
         // 毎フレーム実行する処理
         foreach (var e in _states) e?.Update();
 
-        // ステートの遷移
+        // 遷移チェックと実行（毎フレームやる必要は特に無いので後で修正する。）
         foreach (var e in _nextNodes) // 次のノードを一個ずつ取り出してチェックする
         {
             // 条件を表現する値が存在しない場合、遷移条件を確認する必要がないので次の遷移をチェックする。
@@ -102,9 +109,10 @@ public class StateMachineNode : ScriptableObject
     public virtual void Exit()
     {
         foreach (var e in _states) e?.Exit();
-        IsRunning = false;
+        IsRunning = false; // 現在実行中ではない事を表現する。
     }
 
+    // 引数に渡された情報を基にCloneのセットアップを行う。また、自身はCloneであるとする。
     public virtual StateMachineNode CloneSetup(StateMachineSO stateMachineClone, StateMachineNode original, Dictionary<StateMachineNode, StateMachineNode> nodes)
     {
         _stateMachine = stateMachineClone;
@@ -129,8 +137,6 @@ public class StateMachineNode : ScriptableObject
         {
             if (original._states[i] == null) continue;
             this._states[i] = (IState)Activator.CreateInstance(original._states[i].GetType());
-            //Debug.Log(original._states[i].GetHashCode());
-            //Debug.Log(this._states[i].GetHashCode());
         }
 
         return this;
