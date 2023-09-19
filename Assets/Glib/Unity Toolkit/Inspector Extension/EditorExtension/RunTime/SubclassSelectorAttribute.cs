@@ -1,4 +1,9 @@
 using UnityEngine;
 
-public class SubclassSelectorAttribute : PropertyAttribute
-{ }
+namespace Glib
+{
+    namespace InspectorExtension
+    {
+        public class SubclassSelectorAttribute : PropertyAttribute { }
+    }
+}

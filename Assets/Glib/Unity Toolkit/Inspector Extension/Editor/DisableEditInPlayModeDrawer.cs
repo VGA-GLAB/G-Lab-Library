@@ -3,22 +3,28 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(DisableEditInPlayModeAttribute))]
-public class DisableEditInPlayModeDrawer : PropertyDrawer
+namespace Glib
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    namespace InspectorExtension
     {
-        // ゲームが再生中でない場合のみ、通常のフィールドを表示
-        if (!EditorApplication.isPlaying)
+        [CustomPropertyDrawer(typeof(DisableEditInPlayModeAttribute))]
+        public class DisableEditInPlayModeDrawer : PropertyDrawer
         {
-            EditorGUI.PropertyField(position, property, label);
-        }
-        else
-        {
-            // ゲームが再生中の場合、フィールドを無効化（編集不可）にする
-            GUI.enabled = false;
-            EditorGUI.PropertyField(position, property, label);
-            GUI.enabled = true;
+            public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+            {
+                // ゲームが再生中でない場合のみ、通常のフィールドを表示
+                if (!EditorApplication.isPlaying)
+                {
+                    EditorGUI.PropertyField(position, property, label);
+                }
+                else
+                {
+                    // ゲームが再生中の場合、フィールドを無効化（編集不可）にする
+                    GUI.enabled = false;
+                    EditorGUI.PropertyField(position, property, label);
+                    GUI.enabled = true;
+                }
+            }
         }
     }
 }

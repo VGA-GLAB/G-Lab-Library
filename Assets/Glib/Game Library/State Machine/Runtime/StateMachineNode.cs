@@ -1,7 +1,7 @@
 // 日本語対応
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Glib.InspectorExtension;
 using UnityEngine;
 
 /// <summary>
