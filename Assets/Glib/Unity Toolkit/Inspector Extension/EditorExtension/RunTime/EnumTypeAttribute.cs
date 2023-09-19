@@ -1,4 +1,10 @@
 // 日本語対応
 using UnityEngine;
 
-public class EnumTypeAttribute : PropertyAttribute { }
+namespace Glib
+{
+    namespace InspectorExtension
+    {
+        public class EnumTypeAttribute : PropertyAttribute { }
+    }
+}

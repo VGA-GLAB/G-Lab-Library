@@ -1,3 +1,9 @@
 using UnityEngine;
 
-public class SceneNameAttribute : PropertyAttribute { }
+namespace Glib
+{
+    namespace InspectorExtension
+    {
+        public class SceneNameAttribute : PropertyAttribute { }
+    }
+}
