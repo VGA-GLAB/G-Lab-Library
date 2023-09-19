@@ -1,3 +1,9 @@
 ﻿using UnityEngine;
 
-public class TagNameAttribute : PropertyAttribute { }
+namespace Glib
+{
+    namespace InspectorExtension
+    {
+        public class TagNameAttribute : PropertyAttribute { }
+    }
+}

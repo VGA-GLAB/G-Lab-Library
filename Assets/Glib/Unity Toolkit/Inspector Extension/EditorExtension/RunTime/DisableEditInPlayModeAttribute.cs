@@ -1,7 +1,10 @@
 // 日本語対応
 using UnityEngine;
 
-public class DisableEditInPlayModeAttribute : PropertyAttribute
+namespace Glib
 {
-
+    namespace InspectorExtension
+    {
+        public class DisableEditInPlayModeAttribute : PropertyAttribute { }
+    }
 }

@@ -1,3 +1,9 @@
 using UnityEngine;
 
-public class AnimationParameterAttribute : PropertyAttribute { }
+namespace Glib
+{
+    namespace InspectorExtension
+    {
+        public class AnimationParameterAttribute : PropertyAttribute { }
+    }
+}
