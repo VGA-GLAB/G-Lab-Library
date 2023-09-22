@@ -1,0 +1,281 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8579465260894872549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A712-1"
+  _text: "\u305D\u308D\u305D\u308D"
+  _nextNodes:
+  - {fileID: -6625094341979193113}
+  _position: {x: 599.99994, y: -78.66667}
+  _guid: 673865c70e9f79b41beca9859d96a220
+--- !u!114 &-8326231839789772868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u9078\u629E\u80A22-2"
+  _text: "\u9078\u629E\u80A25"
+  _nextNodes:
+  - {fileID: -5063110348142972377}
+  _position: {x: 450.6667, y: -229.66666}
+  _guid: 8c2f0b990bbad9a42b9a50016b132b32
+--- !u!114 &-6665088155609289598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A713-1"
+  _text: "\u3042\u3042\u3042\u3042\u3042"
+  _nextNodes:
+  - {fileID: 8996386125585262831}
+  _position: {x: 450.66675, y: 73.99998}
+  _guid: 7fa837dba4c313c449d528a555fb0940
+--- !u!114 &-6625094341979193113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A712-2"
+  _text: "\u304A\u3044\u3068\u307E"
+  _nextNodes: []
+  _position: {x: 748.3334, y: -78.66667}
+  _guid: 81838fdda0d739e4b8ee023fbe1cedd0
+--- !u!114 &-6302752889473984995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A713-3"
+  _text: "\u3046\u3046\u3046\u3046\u3046"
+  _nextNodes: []
+  _position: {x: 748.6666, y: 73.99997}
+  _guid: 2da3940135d46e549a61540ac0ceea46
+--- !u!114 &-6081440556255544145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u9078\u629E\u80A22-1"
+  _text: "\u9078\u629E\u80A24"
+  _nextNodes: []
+  _position: {x: 450.3333, y: -374.6534}
+  _guid: 39204694c2f5b6a41a50aa1722a5bf25
+--- !u!114 &-5839956814118871931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6723744a0239c0409743e6d9a105fbb, type: 3}
+  m_Name: Root Node
+  m_EditorClassIdentifier: 
+  _title: Root Node
+  _text: 
+  _nextNodes:
+  - {fileID: -2175356813293502697}
+  _position: {x: -155.66669, y: -78.66666}
+  _guid: 00ddbe07d462f4441974c85fc87afc2e
+--- !u!114 &-5063110348142972377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A711-1"
+  _text: "\u3058\u3083\u306D"
+  _nextNodes: []
+  _position: {x: 600.23334, y: -230.00005}
+  _guid: fbfc15b936f19a94da993be18883c205
+--- !u!114 &-3914150619924399409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u9078\u629E\u80A21-2"
+  _text: "\u9078\u629E\u80A22"
+  _nextNodes:
+  - {fileID: -6665088155609289598}
+  _position: {x: 298, y: 73.999985}
+  _guid: a4471fcdecb9e374ba7a797bce2de154
+--- !u!114 &-2175356813293502697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A711"
+  _text: "\u3084\u3042\u3053\u3093\u306B\u3061\u306F\n\u4ECA\u65E5\u3082\u3044\u3044\u5929\u6C17\u3060\u306D"
+  _nextNodes:
+  - {fileID: 7219226785692257113}
+  _position: {x: -2.3333435, y: -78.66666}
+  _guid: 910bd9d73f2583e44968dc8b39996118
+--- !u!114 &-1925231937879104828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u9078\u629E\u80A22-3"
+  _text: "\u9078\u629E\u80A26"
+  _nextNodes:
+  - {fileID: -8579465260894872549}
+  _position: {x: 450.40002, y: -78.400024}
+  _guid: 9ab8c86cf993c0d4e8daaea9a7692fa6
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ddaaca8618c2d24db4bf63cebca2e2d, type: 3}
+  m_Name: Demo Data
+  m_EditorClassIdentifier: 
+  _rootNode: {fileID: -5839956814118871931}
+  _nodes:
+  - {fileID: -5839956814118871931}
+  - {fileID: -2175356813293502697}
+  - {fileID: 7219226785692257113}
+  - {fileID: -3914150619924399409}
+  - {fileID: 4419405946001621056}
+  - {fileID: -1925231937879104828}
+  - {fileID: -8326231839789772868}
+  - {fileID: -6081440556255544145}
+  - {fileID: -8579465260894872549}
+  - {fileID: -5063110348142972377}
+  - {fileID: -6625094341979193113}
+  - {fileID: -6665088155609289598}
+  - {fileID: 8996386125585262831}
+  - {fileID: -6302752889473984995}
+--- !u!114 &4419405946001621056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u9078\u629E\u80A21-1"
+  _text: "\u9078\u629E\u80A21"
+  _nextNodes:
+  - {fileID: -1925231937879104828}
+  - {fileID: -8326231839789772868}
+  - {fileID: -6081440556255544145}
+  _position: {x: 298.40002, y: -78.40001}
+  _guid: 1e79571008bdd5d46b87a3e857cf21d4
+--- !u!114 &7219226785692257113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A712"
+  _text: "\u30CF\u30ED\u30FC"
+  _nextNodes:
+  - {fileID: 4419405946001621056}
+  - {fileID: -3914150619924399409}
+  _position: {x: 142.70998, y: -78.66667}
+  _guid: 7da14c012d1ad184a8a37620731069f6
+--- !u!114 &8996386125585262831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc2e6e0e17ae4db335b188ec42fb6, type: 3}
+  m_Name: Talk Data
+  m_EditorClassIdentifier: 
+  _title: "\u4F1A\u8A713-2"
+  _text: "\u3044\u3044\u3044\u3044\u3044"
+  _nextNodes:
+  - {fileID: -6302752889473984995}
+  _position: {x: 600, y: 74}
+  _guid: 807a09bfff029544386204c4b009686c
