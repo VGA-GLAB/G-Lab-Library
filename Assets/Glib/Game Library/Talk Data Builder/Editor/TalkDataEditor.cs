@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 using Glib.Talk;
 using System.Linq;
 using System.IO;
+using UnityEditor.Callbacks;
+using UnityEditorInternal;
 
 public class TalkDataEditor : EditorWindow
 {
@@ -16,6 +18,14 @@ public class TalkDataEditor : EditorWindow
     {
         TalkDataEditor wnd = GetWindow<TalkDataEditor>();
         wnd.titleContent = new GUIContent("TalkDataEditor");
+    }
+
+    [OnOpenAsset(0)]
+    public static bool OnOpenWindow(int instanceID, int line)
+    {
+        if (EditorUtility.InstanceIDToObject(instanceID) is not TalkDataBuilder) return false;
+        var window = EditorWindow.GetWindow<TalkDataEditor>();
+        return true;
     }
 
     public void CreateGUI()
