@@ -7,7 +7,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-[CreateAssetMenu(fileName = "StateMachineData", menuName = "ScriptableObjects/StateMachine", order = 1)]
+[CreateAssetMenu(fileName = "StateMachineData", menuName = "Glib/StateMachine", order = 1)]
 public class StateMachineSO : ScriptableObject
 {
     [HideInInspector]

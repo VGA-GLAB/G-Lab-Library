@@ -6,7 +6,7 @@ namespace Glib
 {
     namespace Talk
     {
-        [CreateAssetMenu()]
+        [CreateAssetMenu(fileName = "Talk Data Builder", menuName = "Glib/Talk Data Builder")]
         public class TalkDataBuilder : ScriptableObject
         {
             [SerializeField]
