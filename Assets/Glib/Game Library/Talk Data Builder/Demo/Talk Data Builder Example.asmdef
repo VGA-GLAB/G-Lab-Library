@@ -1,0 +1,16 @@
+{
+    "name": "TalkDataBuilderExample",
+    "rootNamespace": "",
+    "references": [
+        "GUID:11d210cabe176c64aa6cc151b444e628"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
