@@ -25,6 +25,11 @@ public class TalkDataController : MonoBehaviour
         _currents = _talkData.RootNode.NextNodes;
     }
 
+    public void ResetCurrents()
+    {
+        _currents = _talkData.RootNode.NextNodes;
+    }
+
     public void NextInput()
     {
         // 必要であればIndexを更新する。
@@ -65,6 +70,7 @@ public class TalkDataController : MonoBehaviour
             Debug.LogWarning("既にリーフノードだと思われます。");
         }
     }
+
     private bool IsInIndex(Array array, int index)
     {
         return index >= 0 && index < array.Length;
