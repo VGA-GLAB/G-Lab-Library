@@ -71,6 +71,29 @@ public class TalkDataController : MonoBehaviour
         }
     }
 
+    public bool TryStep(out IReadOnlyList<Node> nexts)
+    {
+        // _currentsを更新する。
+        if (_currents != null &&
+            IsInIndex(_currents, _index) &&
+            _currents[_index].NextNodes != null &&
+            _currents[_index].NextNodes.Count != 0)
+        {
+            HoverItem.Unhover();
+            _currents = _currents[_index].NextNodes;
+            _index = 0;
+            HoverItem.Hover();
+
+            nexts = _currents;
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("既にリーフノードだと思われます。");
+            nexts = null;
+            return false;
+        }
+    }
     private bool IsInIndex(Array array, int index)
     {
         return index >= 0 && index < array.Length;
