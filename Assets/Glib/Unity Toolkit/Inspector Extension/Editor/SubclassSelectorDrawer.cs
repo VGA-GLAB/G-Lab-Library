@@ -27,7 +27,8 @@ namespace Glib
                 _currentIndex = Array.IndexOf(_typeFullNameArray, property.managedReferenceFullTypename);
                 if (_currentIndex == -1) _currentIndex = 0;
 
-                _currentIndex = EditorGUI.Popup(position, label.text, _currentIndex, _typeFullNameArray);
+                Rect popupRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+                _currentIndex = EditorGUI.Popup(popupRect, label.text, _currentIndex, _typeFullNameArray);
 
                 if (_currentIndex != oldIndex)
                 {
@@ -39,7 +40,7 @@ namespace Glib
 
             public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
             {
-                return EditorGUI.GetPropertyHeight(property, true); ;
+                return EditorGUI.GetPropertyHeight(property, true);
             }
 
             /// <summary> メンバの初期化処理 </summary>
