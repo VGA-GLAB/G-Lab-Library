@@ -33,6 +33,13 @@ namespace Glib
                 {
                     SelectedIndexChanged(property);
                 }
+
+                EditorGUI.PropertyField(position, property, true);
+            }
+
+            public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+            {
+                return EditorGUI.GetPropertyHeight(property, true); ;
             }
 
             /// <summary> メンバの初期化処理 </summary>
