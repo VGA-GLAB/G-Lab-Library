@@ -27,7 +27,10 @@ namespace Glib
 
             public Collider[] GetOverlappingColliders(Transform origin, out int hitCount)
             {
-                results ??= new Collider[_arrayCapacity];
+                if (results == null || results.Length != _arrayCapacity)
+                {
+                    results = new Collider[_arrayCapacity];
+                }
 
                 hitCount = Physics.OverlapBoxNonAlloc(origin.position + _dir.normalized * _maxDistance, _halfExtents, results, origin.rotation, _layerMask);
 
