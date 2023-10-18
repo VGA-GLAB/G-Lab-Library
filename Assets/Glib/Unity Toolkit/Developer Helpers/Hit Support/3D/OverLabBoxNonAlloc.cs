@@ -12,7 +12,7 @@ namespace Glib
         {
             [SerializeField]
             [Range(1, 100)]
-            private int _arrayCapacity;
+            private int _arrayCapacity = 1;
 
             [SerializeField]
             private Vector3 _dir = default;
@@ -32,7 +32,7 @@ namespace Glib
                     results = new Collider[_arrayCapacity];
                 }
 
-                hitCount = Physics.OverlapBoxNonAlloc(origin.position + _dir.normalized * _maxDistance, _halfExtents, results, origin.rotation, _layerMask);
+                hitCount = Physics.OverlapBoxNonAlloc(origin.rotation * (origin.position + _dir.normalized * _maxDistance), _halfExtents, results, origin.rotation, _layerMask);
 
                 return results;
             }
